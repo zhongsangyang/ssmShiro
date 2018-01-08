@@ -1,0 +1,21 @@
+http://jinnianshilongnian.iteye.com/blog/2029717
+网址是上面的
+
+此项目时ssm整合shiro的登录验证。其它的角色，和权限在研究中。待完善。
+
+注意修改properties里面的配置，和注意spring-shiro-web.xml里面的 <!-- Shiro的Web过滤器 -->会拦截很多请求，所以总是进不去springmvc的url请求
+要这里配置，具体要看<property name="filterChainDefinitions">
+            <value>
+               	/login/login = anon
+                /** = authc
+                /logout = logout
+                /** = user
+            </value>
+        </property>里面的url配置。自己搜索，我也在学习。
+
+第12章节 把文件拷贝过来，就能用，但是要在realm下的UserRealm重写getName()方法，
+在spring-shiro-web.xml修改缓存配置,
+在UserRealm里面修改原有的盐值凭证，改成，utils里面的MySimpleByteSource
+就能验证成功了。
+这是一个已经成功的例子，我放博客里面，我也是菜鸟，提供交流学习使用。
+Authenticator的职责是验证用户帐号，是Shiro API中身份验证核心的入口点：
